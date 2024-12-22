@@ -12,7 +12,11 @@ public interface EmployeeMapper {
      * @param username
      * @return
      */
-    @Select("select * from employee where username = #{username}")
     Employee getByUsername(String username);
 
+    /**
+     * 保存员工
+     * @param employee
+     */
+    void insert(Employee employee);
 }
