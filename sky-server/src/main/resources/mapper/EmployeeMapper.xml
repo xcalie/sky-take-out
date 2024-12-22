@@ -19,4 +19,14 @@
         <include refid="commonSelect"/>
         where username = #{username}
     </select>
+
+    <select id="pageQuery" resultType="com.sky.entity.Employee">
+        <include refid="commonSelect"/>
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name}, '%')
+            </if>
+        </where>
+        order by create_time desc
+    </select>
 </mapper>
