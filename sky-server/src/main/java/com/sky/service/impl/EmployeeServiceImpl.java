@@ -90,17 +90,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
 
         //设置当前记录和创建时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+        /*employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());*/
 
         //设置当前记录创建人id 和 修改人id
-        //TODO 后期需要从session中获取当前登录用户的id
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        /*employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());*/
 
         employeeMapper.insert(employee);
     }
 
+    /**
+     * 分页查询员工
+     *
+     * @param employeePageQueryDTO
+     * @return
+     */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
@@ -111,6 +116,52 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> records = page.getResult();
 
         return new PageResult(total, records);
+    }
+
+    /**
+     * 启用或停用员工
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void startOrStop(Integer status, Long id) {
+        // update employee set status = #{status}, update_time = now(), update_user = #{updateUser} where id = #{id}
+        Employee employee = Employee.builder()
+                .id(id)
+                .status(status)
+                .build();
+        employeeMapper.update(employee);
+    }
+
+    /**
+     * 根据id查询员工
+     * @param id
+     * @return
+     */
+    @Override
+    public Employee getById(Long id) {
+        return employeeMapper.selectById(id);
+    }
+
+    /**
+     * 更新员工
+     * @param employeeDTO
+     */
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+
+        //对象拷贝
+        BeanUtils.copyProperties(employeeDTO, employee);
+
+        //设置当前记录和创建时间
+        /*employee.setUpdateTime(LocalDateTime.now());*/
+
+        //设置当前记录创建人id 和 修改人id
+        /*employee.setUpdateUser(BaseContext.getCurrentId());*/
+
+        employeeMapper.update(employee);
     }
 
 }

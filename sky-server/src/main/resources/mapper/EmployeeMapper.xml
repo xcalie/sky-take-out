@@ -15,6 +15,24 @@
             (#{name}, #{username}, #{password}, #{phone}, #{sex}, #{idNumber}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
     </insert>
 
+    <update id="update">
+        update employee
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="idNumber != null and idNumber != ''">id_number = #{idNumber},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null and updateUser != ''">update_user = #{updateUser},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
     <select id="getByUsername" resultType="com.sky.entity.Employee">
         <include refid="commonSelect"/>
         where username = #{username}
@@ -28,5 +46,10 @@
             </if>
         </where>
         order by create_time desc
+    </select>
+
+    <select id="selectById" resultType="com.sky.entity.Employee">
+        <include refid="commonSelect"/>
+        where id = #{id}
     </select>
 </mapper>
