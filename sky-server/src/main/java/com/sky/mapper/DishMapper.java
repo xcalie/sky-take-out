@@ -69,4 +69,11 @@ public interface DishMapper {
      * @return
      */
     List<Dish> listByCategory(Long categoryId);
+
+    /**
+     * 查询菜品
+     * @param dish
+     * @return
+     */
+    List<Dish> list(Dish dish);
 }

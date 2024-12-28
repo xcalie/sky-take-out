@@ -68,7 +68,7 @@ public class DishController {
 
 
     /**
-     * 根据id查询菜品
+     * 根据id查询 菜品
      * @param id
      * @return
      */
@@ -90,7 +90,9 @@ public class DishController {
     @ApiOperation("根据分类查找菜品")
     public Result<List<Dish>> getListByCategory(Long categoryId) {
         log.info("根据分类查找菜品:{}", categoryId);
+
         List<Dish> dishList = dishService.getListByCategory(categoryId);
+
         return Result.success(dishList);
     }
 

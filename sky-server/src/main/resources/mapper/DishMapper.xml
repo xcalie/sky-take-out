@@ -64,6 +64,10 @@
         <include refid="CommonSelect"/>
         where category_id = #{categoryId}
     </select>
+    
+    <select id="list" resultType="com.sky.entity.Dish">
+        <include refid="CommonSelect"/>
+    </select>
 
 
 </mapper>
