@@ -17,11 +17,11 @@
         update dish
         <set>
             <if test="name != null and name != ''">name = #{name},</if>
-            <if test="categoryId != null and categoryId != ''">category_id = #{categoryId},</if>
-            <if test="price != null and price != ''">price = #{price},</if>
-            <if test="image != null and image != ''">image = #{image},</if>
-            <if test="description != null and description != ''">description = #{description},</if>
-            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="categoryId != null">category_id = #{categoryId},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="image != null">image = #{image},</if>
+            <if test="description != null">description = #{description},</if>
+            <if test="status != null">status = #{status},</if>
             <if test="updateTime != null">update_time = #{updateTime},</if>
             <if test="updateUser != null">update_user = #{updateUser},</if>
         </set>
@@ -62,9 +62,16 @@
 
     <select id="listByCategory" resultType="com.sky.entity.Dish">
         <include refid="CommonSelect"/>
-        where category_id = #{categoryId}
+        <where>
+            <if test="categoryId != null and categoryId != ''">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+        </where>
     </select>
-    
+
     <select id="list" resultType="com.sky.entity.Dish">
         <include refid="CommonSelect"/>
     </select>

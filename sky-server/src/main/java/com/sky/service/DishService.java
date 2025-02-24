@@ -56,7 +56,7 @@ public interface DishService {
      *
      * @return
      */
-    List<Dish> getListByCategory(Long categoryId);
+    List<DishVO> getListByCategory(Dish dish);
 
     /**
      * 条件查询菜品和口味

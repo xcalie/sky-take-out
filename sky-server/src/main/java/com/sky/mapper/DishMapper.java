@@ -65,10 +65,10 @@ public interface DishMapper {
 
     /**
      * 根据分类id查询菜品
-     * @param categoryId
+     * @param dish
      * @return
      */
-    List<Dish> listByCategory(Long categoryId);
+    List<Dish> listByCategory(Dish dish);
 
     /**
      * 查询菜品
