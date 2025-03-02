@@ -17,5 +17,10 @@
         where openid = #{openid}
     </select>
 
+    <select id="getById" resultType="com.sky.entity.User">
+        <include refid="CommonSelect"/>
+        where id = #{id}
+    </select>
+
 
 </mapper>

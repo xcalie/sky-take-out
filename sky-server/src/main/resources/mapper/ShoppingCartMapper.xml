@@ -12,6 +12,10 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="deleteByUserId">
+        delete from shopping_cart where user_id = #{userId};
+    </delete>
+
     <select id="list" resultType="com.sky.entity.ShoppingCart">
         SELECT * FROM shopping_cart
         <where>
